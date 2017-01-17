@@ -26,3 +26,61 @@ app.listen(appEnv.port, '0.0.0.0', function() {
   // print a message when the server starts listening
   console.log("server starting on " + appEnv.url);
 });
+
+
+
+// 松尾さんのガイドを参照して以下を追加
+
+
+var passport = require('passport');
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
+
+
+var services = JSON.parse(process.env.VCAP_SERVICES);
+var isSso = false;
+var ssoConfig = null;
+if (services['SingleSignOn'] != undefined){
+  isSso = true;
+  ssoConfig = services['SingleSignOn'][0];
+}
+
+
+if (isSso) {
+  var OpenIDConnectStrategy = require('passport-idaas-openidconnect').IDaaSOIDCStrategy;
+  passport.use(new OpenIDConnectStrategy({
+    authorizationURL: ssoConfig.credentials.authorizationEndpointUrl,
+    tokenURL: ssoConfig.credentials.tokenEndpointUrl,
+    clientID: ssoConfig.credentials.clientId,
+    scope: ssoConfig.credentials.serverSupportedScope[0],
+    response_type: 'code',
+    clientSecret: ssoConfig.credentials.secret,
+    callbackURL: 'https://nodejs-mmrn.mybluemix.net/auth/sso/callback',
+    skipUserProfile: true,
+    issuer: ssoConfig.credentials.issuerIdentifier
+  }, function(accessToken, refreshToken, profile, done) {
+    process.nextTick(function() {
+      profile.accessToken = accessToken;
+      profile.refreshToken = refreshToken;
+      done(null, profile);
+    });
+  }));
+}
+
+
+// Single Sign On Login処理
+app.get(‘/loginSSO’, passport.authenticate(‘openidconnect’, {}));
+app.get(‘/auth/sso/callback’, passport.authenticate(‘openidconnect’, {
+    failureRedirect: ‘/loginSSO’
+  }), function(req, res) {
+  //Successfully Authenticated
+  //……
+  });
+});
