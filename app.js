@@ -76,5 +76,5 @@ app.get(‘/auth/sso/callback’, passport.authenticate(‘openidconnect’, {
   }), function(req, res) {
   //Successfully Authenticated
   //……
-  });
+  //});
 });
