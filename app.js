@@ -27,10 +27,7 @@ app.listen(appEnv.port, '0.0.0.0', function() {
   console.log("server starting on " + appEnv.url);
 });
 
-
-
 // 松尾さんのガイドを参照して以下を追加
-
 
 var passport = require('passport');
 app.use(passport.initialize());
@@ -43,7 +40,6 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-
 var services = JSON.parse(process.env.VCAP_SERVICES);
 var isSso = false;
 var ssoConfig = null;
@@ -51,7 +47,6 @@ if (services['SingleSignOn'] != undefined){
   isSso = true;
   ssoConfig = services['SingleSignOn'][0];
 }
-
 
 if (isSso) {
   var OpenIDConnectStrategy = require('passport-idaas-openidconnect').IDaaSOIDCStrategy;
@@ -73,7 +68,6 @@ if (isSso) {
     });
   }));
 }
-
 
 // Single Sign On Login処理
 app.get(‘/loginSSO’, passport.authenticate(‘openidconnect’, {}));
