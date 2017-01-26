@@ -72,7 +72,13 @@ if (isSso) {
 // Single Sign On Login処理
 //app.get(‘/loginSSO‘, passport.authenticate(‘openidconnect’, {}));
 //app.get('/loginSSO', passport.authenticate('openidconnect', {}));
-app.get('/', passport.authenticate('openidconnect', {}));
+//app.get('/', passport.authenticate('openidconnect', {}));
+
+app.get('/', function(req, res) {
+  res.send('root page');
+//  res.redirect('/loginSSO');
+});
+
 //app.get(‘/auth/sso/callback’, passport.authenticate(‘openidconnect’, {
 app.get('/auth/sso/callback', passport.authenticate('openidconnect', {
     successRedirect: '/success',
