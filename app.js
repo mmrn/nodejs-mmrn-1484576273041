@@ -90,12 +90,12 @@ app.get('/auth/sso/callback', passport.authenticate('openidconnect', {
 
 app.get('/success', sendSuccess, redirectToppage);
 
-Var sendSuccess = function(req, res, next) {
+var sendSuccess = function(req, res, next) {
   res.send('Login Success !!');
   return next();
 };
 
-Var redirectToppage = function(req, res, next) {
+var redirectToppage = function(req, res, next) {
   res.redirect('https://nodejs-mmrn.mybluemix.net/');
 };
 
