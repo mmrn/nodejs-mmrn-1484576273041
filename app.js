@@ -101,7 +101,8 @@ app.get('/auth/sso/callback', passport.authenticate('openidconnect', {
 
 app.get('/success', function(req, res) {
 //  res.send('Login Success !!');
-  res.redirect('https://nodejs-mmrn.mybluemix.net/');
+//  res.redirect('https://nodejs-mmrn.mybluemix.net/');
+  res.redirect('/');
 //  res.redirect('/');
 });
 
