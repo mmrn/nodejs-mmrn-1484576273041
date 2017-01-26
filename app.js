@@ -99,11 +99,13 @@ app.get('/auth/sso/callback', passport.authenticate('openidconnect', {
 //  res.redirect('https://nodejs-mmrn.mybluemix.net/');
 //};
 
-app.get('/success', function(req, res) {
-//  res.send('Login Success !!');
+app.get('/success', function(req, res, next) {
+  res.send('Login Success !!');
+  next();
+}, function(req, res, next) {
 //  res.redirect('https://nodejs-mmrn.mybluemix.net/');
   res.redirect('/');
-//  res.redirect('/');
+  next();
 });
 
 app.get('/failure', function(req, res) {
