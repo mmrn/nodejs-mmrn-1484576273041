@@ -71,7 +71,7 @@ if (isSso) {
 
 // Single Sign On Login処理
 app.get('/login', passport.authenticate('openidconnect', {}));
-app.get('/', passport.authenticate('openidconnect', {}));
+//app.get('/', passport.authenticate('openidconnect', {}));
 //app.get('https://nodejs-mmrn.mybluemix.net', passport.authenticate('openidconnect', {}));
 
 //app.get(‘/auth/sso/callback’, passport.authenticate(‘openidconnect’, {
