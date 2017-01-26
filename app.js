@@ -70,20 +70,20 @@ if (isSso) {
 }
 
 // Single Sign On Login処理
-//app.get(‘/loginSSO‘, passport.authenticate(‘openidconnect’, {}));
 app.get('/login', passport.authenticate('openidconnect', {}));
+app.get('/', passport.authenticate('openidconnect', {}));
 //app.get('https://nodejs-mmrn.mybluemix.net', passport.authenticate('openidconnect', {}));
 
 //app.get(‘/auth/sso/callback’, passport.authenticate(‘openidconnect’, {
 app.get('/auth/sso/callback', passport.authenticate('openidconnect', {
     successRedirect: '/success',
-//  failureRedirect: ‘/loginSSO‘
-    failureRedirect: '/failure',
-  }), function(req, res) {});
+    failureRedirect: '/failure'
+//  failureRedirect: ‘/login‘
+}));
+//  }), function(req, res) {
   //Successfully Authenticated
   // ……
 //  });
-//});
 
 // IBM Connectionsのサンプルコードからコピー
 // https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/W89b23bf7ad80_4411_822f_2a6dc171c6b3/page/Configure%20Bluemix%20deployed%20Node%20JS%20web%20app%20with%20IBM%20Cloud%20IDP%20%28IBM%20SSO%20server%29
@@ -103,12 +103,12 @@ app.get('/success', function (req, res, next) {
   res.send('Login Success !!');
   next();
 }, function (req, res) {
-  res.redirect('https://nodejs-mmrn.mybluemix.net/');
-//  res.redirect('/');
+//  res.redirect('https://nodejs-mmrn.mybluemix.net/');
+  res.redirect('/');
 //  next();
 });
 
 app.get('/failure', function(req, res) {
   res.send('login Failure ..');
-//  res.redirect('/loginSSO');
+//  res.redirect('/login');
 });
