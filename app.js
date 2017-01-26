@@ -103,8 +103,8 @@ app.get('/success', function(req, res, next) {
   res.send('Login Success !!');
   next();
 }, function(req, res, next) {
-//  res.redirect('https://nodejs-mmrn.mybluemix.net/');
-  res.redirect('/');
+  res.redirect('https://nodejs-mmrn.mybluemix.net/');
+//  res.redirect('/');
   next();
 });
 
