@@ -87,11 +87,23 @@ app.get('/auth/sso/callback', passport.authenticate('openidconnect', {
 
 // IBM Connectionsのサンプルコードからコピー
 // https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/W89b23bf7ad80_4411_822f_2a6dc171c6b3/page/Configure%20Bluemix%20deployed%20Node%20JS%20web%20app%20with%20IBM%20Cloud%20IDP%20%28IBM%20SSO%20server%29
-app.get('/success', function(req, res) {
+
+app.get('/success', sendSuccess, redirectToppage);
+
+Var sendSuccess = function(req, res, next) {
   res.send('Login Success !!');
+  return next();
+};
+
+Var redirectToppage = function(req, res, next) {
+  res.redirect('https://nodejs-mmrn.mybluemix.net/');
+};
+
+//app.get('/success', function(req, res) {
+//  res.send('Login Success !!');
 //  res.redirect("https://nodejs-mmrn.mybluemix.net/");
 //  res.redirect('/');
-});
+//});
 
 app.get('/failure', function(req, res) {
   res.send('login Failure ..');
