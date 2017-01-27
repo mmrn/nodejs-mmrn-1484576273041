@@ -79,12 +79,12 @@ app.get('/loginSSO', passport.authenticate('openidconnect', {}));
 
 //app.get(‘/auth/sso/callback’, passport.authenticate(‘openidconnect’, {
 app.get('/auth/sso/callback', passport.authenticate('openidconnect', {
-  failureRedirect: ‘/loginSSO‘
-//  failureRedirect: '/failure'
+//  failureRedirect: ‘/loginSSO‘,
+  failureRedirect: '/failure',
 //  }));
   }), function(req, res) {
   //Successfully Authenticated
-  successRedirect: '/'
+  successRedirect: '/',
 });
 
 //app.get('/success', sendSuccess, redirectToppage);
