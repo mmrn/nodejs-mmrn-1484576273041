@@ -34,8 +34,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser(function(user, done) {
-//  done(null, user);
-  done(null, user.id);
+  done(null, user);
+  var uid = req.session.passport.user.uid;
+//  done(null, user.id);
 });
 passport.deserializeUser(function(obj, done) {
   done(null, obj);
@@ -102,7 +103,8 @@ app.get('/auth/sso/callback', passport.authenticate('openidconnect', {
 
 app.get('/success', function (req, res, next) {
 //  res.send('Login Success !!');
-	var uid = req.session.passport.user.uid;
+//  var uid = req.session.passport.user.uid;
+//  var username = req.session.passport.user.cn;
   res.send(uid);
 //  res.send(req.session.passport.user.cn);
 //  next();
