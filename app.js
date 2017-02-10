@@ -85,7 +85,8 @@ app.get('/auth/sso/callback', passport.authenticate('openidconnect', {
 //  }));
   }), function(req, res) {
   //Successfully Authenticated
-  res.redirect("/");
+//  res.redirect("/");
+  res.redirect("/sucess");
 });
 
 //app.get('/success', sendSuccess, redirectToppage);
