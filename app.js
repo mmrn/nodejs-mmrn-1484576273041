@@ -35,8 +35,8 @@ app.use(passport.session());
 
 passport.serializeUser(function(user, done) {
   done(null, user);
-  var uid = req.session.passport.user.uid;
 //  done(null, user.id);
+//  var uid = req.session.passport.user.uid;
 });
 passport.deserializeUser(function(obj, done) {
   done(null, obj);
@@ -87,8 +87,8 @@ app.get('/auth/sso/callback', passport.authenticate('openidconnect', {
 //  }));
   }), function(req, res) {
   //Successfully Authenticated
-//  res.redirect("/");
-  res.redirect("/success");
+  res.redirect("/");
+//  res.redirect("/success");
 });
 
 //app.get('/success', sendSuccess, redirectToppage);
@@ -102,11 +102,11 @@ app.get('/auth/sso/callback', passport.authenticate('openidconnect', {
 //};
 
 app.get('/success', function (req, res, next) {
-//  res.send('Login Success !!');
+  res.send('Login Success !!');
 //  var uid = req.session.passport.user.uid;
 //  var username = req.session.passport.user.cn;
-  res.send(uid);
-//  res.send(req.session.passport.user.cn);
+//  res.send(uid);
+//  res.send(username);
 //  next();
 //}, function (req, res) {
 //  res.redirect('https://nodejs-mmrn.mybluemix.net/');
