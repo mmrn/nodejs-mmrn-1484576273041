@@ -103,6 +103,7 @@ app.get('/auth/sso/callback', passport.authenticate('openidconnect', {
 
 app.get('/success', function (req, res, next) {
   res.send('Login Success !!');
+  res.send('Login Success 2 !!');
 //  var uid = req.session.passport.user.uid;
 //  var username = req.session.passport.user.cn;
 //  res.send(uid);
